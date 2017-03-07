@@ -11,12 +11,11 @@ import UIKit
 
 class RatingStarView: UIView {
 
-//    var maskLayer: CALayer = CALayer()
     
-    var starWidth: CGFloat = 0
-    var gapWidth: CGFloat = 0
+    fileprivate var starWidth: CGFloat = 0
+    fileprivate var gapWidth: CGFloat = 0
     
-    let progressBar = UIView()
+    fileprivate let progressBar = UIView()
     
     
     var starEmptyColor = UIColor(red: 178 / 255, green: 174 / 255, blue: 166 / 255, alpha: 1) {
@@ -25,11 +24,13 @@ class RatingStarView: UIView {
         }
     }
     
+    @IBInspectable
     var starFillColor = UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 1) {
         didSet {
             progressBar.backgroundColor = starFillColor
         }
     }
+    
     
     var percentage: Float = 1 {
         didSet {
@@ -42,13 +43,14 @@ class RatingStarView: UIView {
         }
     }
     
-    var progressBarWidth: CGFloat {
+    fileprivate var progressBarWidth: CGFloat {
         let fullStars = floor(percentage * Float(starNum))
         let nonfullStarPercent = percentage - fullStars * (1.0 / Float(starNum))
         let progressBarEndX = fullStars * Float(starWidth + gapWidth) + nonfullStarPercent * Float(starNum) * Float(starWidth)
         return CGFloat(progressBarEndX)
     }
     
+    @IBInspectable
     var starNum: Int = 5 {
         didSet {
             self.layoutIfNeeded()
@@ -128,6 +130,7 @@ class RatingStarView: UIView {
             l.frame = CGRect(x: x, y: starTop, width: starWidth, height: starHeight)
             
             maskLayer.addSublayer(l)
+            
         }
         
         self.layer.mask = maskLayer
