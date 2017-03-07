@@ -24,7 +24,7 @@ class ViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        starView.rating = 3.2
+        starView.rating = 2.5
     }
 
 }

@@ -18,13 +18,14 @@ class RatingStarView: UIView {
     
     let progressBar = UIView()
     
-    var starEmptyColor = UIColor(red: 178, green: 174, blue: 166, alpha: 1) {
+    
+    var starEmptyColor = UIColor(red: 178 / 255, green: 174 / 255, blue: 166 / 255, alpha: 1) {
         didSet {
             self.backgroundColor = starEmptyColor
         }
     }
     
-    var starFillColor = UIColor(red: 245, green: 166, blue: 35, alpha: 1) {
+    var starFillColor = UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 1) {
         didSet {
             progressBar.backgroundColor = starFillColor
         }
@@ -32,14 +33,20 @@ class RatingStarView: UIView {
     
     var percentage: Float = 1 {
         didSet {
-            print("percentage did set")
-            let fullStars = ceil(percentage * Float(starNum))
-            let halfStarPercent = percentage - fullStars * (1.0 / Float(starNum))
-            let progressBarEndX = fullStars * Float(starWidth + gapWidth) + halfStarPercent * Float(starWidth)
+            if self.percentage > 1 {
+                self.percentage = 1
+            }
             
-            progressBar.frame.size.width = CGFloat(progressBarEndX)
-            print("endx \(progressBarEndX)   frame: \(progressBar.frame)")
+            progressBar.frame.size.width = progressBarWidth
+            print("endx \(progressBarWidth)   frame: \(progressBar.frame)")
         }
+    }
+    
+    var progressBarWidth: CGFloat {
+        let fullStars = floor(percentage * Float(starNum))
+        let nonfullStarPercent = percentage - fullStars * (1.0 / Float(starNum))
+        let progressBarEndX = fullStars * Float(starWidth + gapWidth) + nonfullStarPercent * Float(starNum) * Float(starWidth)
+        return CGFloat(progressBarEndX)
     }
     
     var starNum: Int = 5 {
@@ -50,7 +57,10 @@ class RatingStarView: UIView {
     
     var rating: Float = 5 {
         didSet {
-            percentage = min(rating / Float(starNum), 1.0)
+            if rating > Float(starNum) {
+                rating = Float(starNum)
+            }
+            percentage = rating / Float(starNum)
         }
     }
     
@@ -70,10 +80,8 @@ class RatingStarView: UIView {
     fileprivate func doInit() {
         backgroundColor = starEmptyColor
         progressBar.backgroundColor = starFillColor
-        
-        progressBar.frame = CGRect(x: 0, y: 0, width: 0, height: bounds.height)
-        
         addSubview(progressBar)
+        
     }
     
     
@@ -123,6 +131,8 @@ class RatingStarView: UIView {
         }
         
         self.layer.mask = maskLayer
+        
+        progressBar.frame = CGRect(x: 0, y: 0, width: progressBarWidth, height: bounds.height)
         
     }
     
