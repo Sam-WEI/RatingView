@@ -98,7 +98,7 @@ class RatingStarView: UIView {
         
         let unitWidth = viewWidth / CGFloat(starNum)
         
-        let starImage = UIImage(named: "star")!
+        let starImage = UIImage(named: "greyStar")!
         let imageSize = starImage.size
         
         let starTop: CGFloat
@@ -134,8 +134,6 @@ class RatingStarView: UIView {
             let l = CALayer()
             l.contentsScale = UIScreen.main.scale
             l.contents = starImage.cgImage
-            l.allowsEdgeAntialiasing = true
-            l.edgeAntialiasingMask = .layerTopEdge
             let x = CGFloat(i) * (starWidth + gapWidth)
             l.frame = CGRect(x: x, y: starTop, width: starWidth, height: starHeight)
             
