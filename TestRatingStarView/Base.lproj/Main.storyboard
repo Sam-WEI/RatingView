@@ -20,11 +20,37 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="kH6-pa-HKk">
+                                <rect key="frame" x="7" y="318" width="361" height="31"/>
+                                <connections>
+                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="VXW-s0-kMO"/>
+                                </connections>
+                            </slider>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g25-tP-Zkv" customClass="RatingStarView" customModule="TestRatingStarView" customModuleProvider="target">
+                                <rect key="frame" x="9" y="260" width="357" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="vXc-Hm-c48"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kH6-pa-HKk" firstAttribute="top" secondItem="g25-tP-Zkv" secondAttribute="bottom" constant="8" id="6vr-VS-GNV"/>
+                            <constraint firstAttribute="trailing" secondItem="g25-tP-Zkv" secondAttribute="trailing" constant="9" id="Bgj-eH-ZAY"/>
+                            <constraint firstItem="kH6-pa-HKk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="UCc-hd-3Bt"/>
+                            <constraint firstItem="g25-tP-Zkv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="9" id="Yug-Od-cbN"/>
+                            <constraint firstAttribute="trailing" secondItem="kH6-pa-HKk" secondAttribute="trailing" constant="9" id="tFd-E0-ZU1"/>
+                            <constraint firstItem="kH6-pa-HKk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="9" id="yxK-S2-4PP"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="starViewFromSB" destination="g25-tP-Zkv" id="zPQ-cg-Haz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
         </scene>
     </scenes>
 </document>

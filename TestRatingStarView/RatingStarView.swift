@@ -15,19 +15,20 @@ class RatingStarView: UIView {
     fileprivate var starWidth: CGFloat = 0
     fileprivate var gapWidth: CGFloat = 0
     
-    fileprivate let progressBar = UIView()
+    fileprivate var progressLayer: CALayer!
+    fileprivate var starViewLayer: CALayer!
     
-    
+    @IBInspectable
     var starEmptyColor = UIColor(red: 178 / 255, green: 174 / 255, blue: 166 / 255, alpha: 1) {
         didSet {
-            self.backgroundColor = starEmptyColor
+            starViewLayer.backgroundColor = starEmptyColor.cgColor
         }
     }
     
     @IBInspectable
     var starFillColor = UIColor(red: 245 / 255, green: 166 / 255, blue: 35 / 255, alpha: 1) {
         didSet {
-            progressBar.backgroundColor = starFillColor
+            progressLayer.backgroundColor = starFillColor.cgColor
         }
     }
     
@@ -37,9 +38,7 @@ class RatingStarView: UIView {
             if self.percentage > 1 {
                 self.percentage = 1
             }
-            
-            progressBar.frame.size.width = progressBarWidth
-            print("endx \(progressBarWidth)   frame: \(progressBar.frame)")
+            progressLayer.frame.size.width = progressBarWidth
         }
     }
     
@@ -80,10 +79,13 @@ class RatingStarView: UIView {
     
     
     fileprivate func doInit() {
-        backgroundColor = starEmptyColor
-        progressBar.backgroundColor = starFillColor
-        addSubview(progressBar)
+        progressLayer = CALayer()
+        progressLayer.contentsScale = UIScreen.main.scale
+        starViewLayer = CALayer()
+        starViewLayer.contentsScale = UIScreen.main.scale
         
+        starViewLayer.backgroundColor = starEmptyColor.cgColor
+        progressLayer.backgroundColor = starFillColor.cgColor
     }
     
     
@@ -118,7 +120,15 @@ class RatingStarView: UIView {
         
         print("star T: \(starTop)  H:\(starHeight)  W:\(starWidth)  gap:\(gapWidth)")
         
+        
+        
+        starViewLayer.frame = bounds
+        starViewLayer.addSublayer(progressLayer)
+        progressLayer.frame = CGRect(x: 0, y: 0, width: progressBarWidth, height: bounds.height)
+        
         let maskLayer = CALayer()
+        maskLayer.contentsScale = UIScreen.main.scale
+
         
         for i in 0..<starNum {
             let l = CALayer()
@@ -133,9 +143,9 @@ class RatingStarView: UIView {
             
         }
         
-        self.layer.mask = maskLayer
         
-        progressBar.frame = CGRect(x: 0, y: 0, width: progressBarWidth, height: bounds.height)
+        starViewLayer.mask = maskLayer
+        self.layer.addSublayer(starViewLayer)
         
     }
     

@@ -12,6 +12,9 @@ class ViewController: UIViewController {
 
     var starView: RatingStarView!
     
+    @IBOutlet weak var starViewFromSB: RatingStarView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.gray
@@ -27,5 +30,10 @@ class ViewController: UIViewController {
         starView.rating = 2.5
     }
 
+    @IBAction func sliderChanged(_ sender: UISlider) {
+        
+        starView.percentage = sender.value
+        starViewFromSB.percentage = sender.value
+    }
 }
 
