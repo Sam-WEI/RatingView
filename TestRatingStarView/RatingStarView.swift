@@ -25,7 +25,7 @@ class RatingStarView: UIView {
         }
     }
     
-    fileprivate let DEFAULT_IMAGE_NAME = "greyStar" // specify a name for default use
+    fileprivate let DEFAULT_ICON_NAME = "greyStar" // specify the name of default icon
     
     fileprivate var starImage: UIImage!
     
@@ -98,7 +98,7 @@ class RatingStarView: UIView {
         starViewLayer.backgroundColor = starEmptyColor.cgColor
         progressLayer.backgroundColor = starFillColor.cgColor
         
-        starImage = UIImage(named: DEFAULT_IMAGE_NAME) ?? UIImage()
+        starImage = UIImage(named: DEFAULT_ICON_NAME) ?? UIImage()
     }
     
     
