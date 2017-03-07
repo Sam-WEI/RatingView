@@ -19,6 +19,17 @@ class RatingStarView: UIView {
     fileprivate var starViewLayer: CALayer!
     
     @IBInspectable
+    var ratingIconImage: UIImage? {
+        didSet {
+            starImage = ratingIconImage
+        }
+    }
+    
+    fileprivate let DEFAULT_IMAGE_NAME = "greyStar" // specify a name for default use
+    
+    fileprivate var starImage: UIImage!
+    
+    @IBInspectable
     var starEmptyColor = UIColor(red: 178 / 255, green: 174 / 255, blue: 166 / 255, alpha: 1) {
         didSet {
             starViewLayer.backgroundColor = starEmptyColor.cgColor
@@ -86,6 +97,8 @@ class RatingStarView: UIView {
         
         starViewLayer.backgroundColor = starEmptyColor.cgColor
         progressLayer.backgroundColor = starFillColor.cgColor
+        
+        starImage = UIImage(named: DEFAULT_IMAGE_NAME) ?? UIImage()
     }
     
     
@@ -98,8 +111,12 @@ class RatingStarView: UIView {
         
         let unitWidth = viewWidth / CGFloat(starNum)
         
-        let starImage = UIImage(named: "greyStar")!
-        let imageSize = starImage.size
+        
+        var imageSize = self.starImage.size
+        
+        if imageSize == CGSize.zero {
+            imageSize = CGSize(width: 1, height: 1)
+        }
         
         let starTop: CGFloat
         let starHeight: CGFloat
@@ -118,7 +135,7 @@ class RatingStarView: UIView {
             starTop = (viewHeight - starHeight) / CGFloat(2)
         }
         
-        print("star T: \(starTop)  H:\(starHeight)  W:\(starWidth)  gap:\(gapWidth)")
+        print("star Top y: \(starTop)  height: \(starHeight)  width:\(starWidth)  gap:\(gapWidth)")
         
         
         

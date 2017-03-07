@@ -19,20 +19,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.gray
         
-        starView = RatingStarView(frame: CGRect(x: 20, y: 150, width: 300, height: 40))
-        self.view.addSubview(starView)
+//        starView = RatingStarView(frame: CGRect(x: 20, y: 150, width: 300, height: 40))
+//        self.view.addSubview(starView)
         
 //        starView.rating = 4.3
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        starView.rating = 2.5
-    }
-
     @IBAction func sliderChanged(_ sender: UISlider) {
         
-        starView.percentage = sender.value
+//        starView.percentage = sender.value
         starViewFromSB.percentage = sender.value
     }
 }
